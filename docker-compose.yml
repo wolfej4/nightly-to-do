@@ -1,0 +1,17 @@
+services:
+  nightly-to-do:
+    build: .
+    container_name: nightly-to-do
+    ports:
+      - "3000:3000"
+    volumes:
+      - nightly-data:/data
+    restart: unless-stopped
+    environment:
+      # Set your local timezone so the 3 AM reset fires at the right time.
+      # Find yours at: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      - TZ=America/New_York
+      - PORT=3000
+
+volumes:
+  nightly-data:

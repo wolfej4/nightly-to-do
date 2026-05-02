@@ -1,0 +1,279 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --border: #2e3348;
+  --accent: #7c6aff;
+  --accent-glow: rgba(124, 106, 255, 0.25);
+  --green: #3dd68c;
+  --green-glow: rgba(61, 214, 140, 0.2);
+  --text: #e8eaf0;
+  --text-muted: #6b7090;
+  --danger: #ff5c5c;
+  --radius: 12px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Header */
+header {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.reset-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.reset-btn:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: rgba(255, 92, 92, 0.08);
+}
+
+/* Progress */
+.progress-bar-wrap {
+  background: var(--surface2);
+  border-radius: 999px;
+  height: 6px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--green));
+  width: 0%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Task list */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-list .loading {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem;
+  font-size: 0.9rem;
+}
+
+.task-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  transition: border-color 0.2s, background 0.2s;
+  animation: slideIn 0.2s ease;
+}
+.task-item:hover { border-color: var(--accent); }
+.task-item.done {
+  background: rgba(61, 214, 140, 0.05);
+  border-color: rgba(61, 214, 140, 0.3);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom checkbox */
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.task-checkbox:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.task-checkbox:checked {
+  background: var(--green);
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-glow);
+}
+.task-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #0f1117;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.task-text {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition: color 0.2s, text-decoration 0.2s;
+  cursor: pointer;
+  user-select: none;
+}
+.task-item.done .task-text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.3rem;
+  border-radius: 6px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+.task-item:hover .delete-btn { color: var(--text-muted); }
+.delete-btn:hover { color: var(--danger) !important; background: rgba(255, 92, 92, 0.1); }
+
+/* All-done banner */
+.all-done-banner {
+  background: linear-gradient(135deg, rgba(61, 214, 140, 0.12), rgba(124, 106, 255, 0.12));
+  border: 1px solid rgba(61, 214, 140, 0.35);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+.all-done-banner .emoji { font-size: 2rem; display: block; margin-bottom: 0.4rem; }
+.all-done-banner p { color: var(--green); font-weight: 600; font-size: 1rem; }
+.all-done-banner small { color: var(--text-muted); font-size: 0.8rem; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Add form */
+.add-form {
+  display: flex;
+  gap: 0.5rem;
+}
+.add-form input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.add-form input::placeholder { color: var(--text-muted); }
+.add-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.add-form button {
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.7rem 1.25rem;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.add-form button:hover { opacity: 0.88; }
+.add-form button:active { transform: scale(0.97); }
+
+/* Footer note */
+.reset-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.85rem;
+  padding: 0.6rem 1.1rem;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 100;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

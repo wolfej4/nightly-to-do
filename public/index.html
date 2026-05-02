@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nightly Wrap-Up</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div>
+          <h1>Nightly Wrap-Up</h1>
+          <p class="subtitle" id="date-display"></p>
+        </div>
+        <button class="reset-btn" id="reset-btn" title="Reset all tasks">&#8635; Reset</button>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="progress-label" id="progress-label">0 of 0 done</p>
+    </header>
+
+    <ul class="task-list" id="task-list">
+      <li class="loading">Loading tasks…</li>
+    </ul>
+
+    <form class="add-form" id="add-form">
+      <input
+        type="text"
+        id="new-task-input"
+        placeholder="Add a task…"
+        autocomplete="off"
+        maxlength="120"
+      />
+      <button type="submit">Add</button>
+    </form>
+
+    <p class="reset-note">Resets automatically at 3:00 AM</p>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

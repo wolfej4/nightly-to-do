@@ -1,0 +1,13 @@
+{
+  "name": "nightly-to-do",
+  "version": "1.0.0",
+  "description": "Nightly task reminder app — resets at 3 AM daily",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-cron": "^3.0.3"
+  }
+}

@@ -3,7 +3,7 @@ services:
     build: .
     container_name: nightly-to-do
     ports:
-      - "3000:3000"
+      - "4000:3000"
     volumes:
       - nightly-data:/data
     restart: unless-stopped
